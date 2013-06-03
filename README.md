@@ -42,3 +42,7 @@ Dronestream::Strike.in_country('Yemen')
 4. Commit your changes (`git commit -am 'Add some feature'`)
 5. Push to the branch (`git push origin my-new-feature`)
 6. Create new Pull Request
+
+## Acknowledgements
+
+Obviously, this gem couldn't be possible without the [dronestream API](http://dronestream.org). So thank you to [Josh Begley](http://joshbegley.com/) for the API. Thanks also to [@ashedryden](http://twitter.com/ashedryden) for turning me onto [hasadronekilledanyonetoday.com](http://hasadronekilledanyonetoday.com) by [Chris Zarate](https://github.com/chriszarate/hadkat), where I discovered the source.
