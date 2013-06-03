@@ -9,7 +9,7 @@ VCR.configure do |c|
   c.hook_into :webmock
 end
 
-Rspec.configure do |config|
+RSpec.configure do |config|
   # Use color in STDOUT
   config.color_enabled = true
 

@@ -1,7 +1,12 @@
 require 'bundler/gem_tasks'
- 
 require 'rake/testtask'
-Rake::TestTask.new do |test|
-  test.test_files = FileList['spec/lib/dronestream/*_spec.rb']
-  test.verbose = true 
+
+require 'rspec/core/rake_task'
+ 
+desc 'Default: run specs.'
+task :default => :test
+
+desc 'Run specs'
+RSpec::Core::RakeTask.new do |test|
+  test.pattern = 'spec/lib/dronestream/*_spec.rb'
 end
