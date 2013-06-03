@@ -18,6 +18,15 @@ describe Dronestream::Strike do
     expect(Dronestream::Strike.base_uri).to eq(uri)
   end
 
+  describe '#response' do
+    context 'no error' do
+      pending 'no error'
+    end
+    context 'error' do
+      pending 'error'
+    end
+  end
+
   describe '#all' do
     it 'parses the api response from json to array' do
       expect(strike.all).to be_instance_of Array

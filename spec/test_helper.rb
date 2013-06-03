@@ -1,6 +1,7 @@
 require 'dronestream'
 require 'rspec'
 require 'vcr'
+require 'webmock/rspec'
 
  
 #VCR config
