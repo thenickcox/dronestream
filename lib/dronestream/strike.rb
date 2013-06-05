@@ -22,7 +22,7 @@ module Dronestream
       end
 
       def with_child_casualties
-        all.keep_if { |strike| strike['children'].length != 0 }
+        all.keep_if { |strike| !strike['children'].to_i.zero? }
       end
 
       def in_town(town)
