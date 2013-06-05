@@ -1,3 +1,7 @@
+## 0.1.1 (June 4, 2013)
+
+* Fix bug in `with_child_casualties`. That method now correctly returns an array, rather than throwing an error.
+
 ## 0.1.0 (June 2, 2013)
 
 * Version bump. Implemented more methods.
