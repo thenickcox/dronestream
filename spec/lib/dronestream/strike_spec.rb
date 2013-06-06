@@ -92,5 +92,12 @@ describe Dronestream::Strike do
     end
   end
 
+  context 'chaining' do
+    let(:new_str) { Dronestream::Strike.in_country('Yemen').with_civilian_casualties.first }
+    it 'does not blow up' do
+      expect(new_str['country']).to eq('Yemen')
+      expect(new_str['civilians']).not_to eq(0)
+    end
+  end
 end
 
