@@ -27,12 +27,20 @@ require 'dronestream'
 #=> true
 ```
 
-Then, you can find drone strikes by a number of criteria. For example:
+Then, you can find strikes by a number of criteria. Version 0.2.3 allows you to chain methods together to combine data points in your query. However, each query returns an instance of the class. To get the data out in a usable format (say, for looping over), simply call `to_a` on the return value of your query.
 
 ```ruby
-Dronestream::Strike.in_country('Yemen')
-#=> [{"_id"=>"51a65578e0932c0e1eb4199f", "number"=>1, "country"=>"Yemen", "date"=>"2002-11-03T00:00:00.000Z", "town"=>"", "location"=>"Marib Province", "deaths"=>"6", "deaths_min"=>"6", "deaths_max"=>"6", "civilians"=>"0", "injuries"=>"", "children"=>"", "tweet_id"=>"278544689483890688", "bureau_id"=>"YEM001", "bij_summary_short"=>"In the first known US targeted assassination using a drone, a CIA Predator struck a car killing six al Qaeda suspects.", "bij_link"=>"http://www.thebureauinvestigates.com/2012/03/29/yemen-reported-us-covert-actions-since-2001/", "target"=>"", "lat"=>"15.47467", "lon"=>"45.322755", "articles"=>[], "names"=>["Qa’id Salim Sinan al-Harithi, Abu Ahmad al-Hijazi, Salih Hussain Ali al-Nunu, Awsan Ahmad al-Tarihi, Munir Ahmad Abdallah al-Sauda, Adil Nasir al-Sauda’"]} ...
+>> Dronestream::Strike.in_country('Yemen')
+#=> Dronestream::Strike
+>> Dronestream::Strike.in_country('Yemen').to_a
+#=> [{"_id"=>"51a65578e0932c0e1eb4199f", "number"=>1, "country"=>"Yemen", "date"=>"2002-11-03T00:00:00.000Z", "town"=>"", "location"=>"Marib Province", "deaths"=>"6", "deaths_min"=>"6", "deaths_max"=>"6", "civilians"=>"0", "injuries"=>""...
+
+>> yemini_strikes_with_civilian_casualties = Dronestream::Strike.in_country('Yemen').with_civilian_casualties
+#=> Dronestream::Strike
+>> yemini_strikes_with_civilian_casualties.to_a
+#=> [{"_id"=>"51a6557ae0932c0e1eb41aad", "number"=>271, "country"=>"Yemen", "date"=>"2011-06-03T00:00:00.000Z", "town"=>"Zinjibar", "location"=>"Abyan Province", "deaths"=>"7", "deaths_min"=>"7", "deaths_max"=>"7", "civilians"=>"4", "injuries"=>""
 ```
+
 
 ## Contributing
 
