@@ -10,6 +10,7 @@ describe Dronestream::Strike do
 
   after do
     VCR.eject_cassette
+    strike.reset
   end
 
   let(:uri) { 'http://api.dronestre.am' }
@@ -18,14 +19,15 @@ describe Dronestream::Strike do
     expect(Dronestream::Strike.base_uri).to eq(uri)
   end
 
-  describe '#response' do
-    context 'no error' do
-      pending 'no error'
-    end
-    context 'error' do
-      pending 'error'
-    end
-  end
+  # TODO write tests for response erroring
+  #describe '#response' do
+    #context 'no error' do
+      #pending 'no error'
+    #end
+    #context 'error' do
+      #pending 'error'
+    #end
+  #end
 
   describe '#all' do
     it 'parses the api response from json to array' do
@@ -33,7 +35,7 @@ describe Dronestream::Strike do
     end
   end
 
-  describe '#country' do
+  describe '#in_country' do
     let(:country_name) { 'Yemen' }
     it 'takes a country and returns strikes from that country' do
       expect(strike.in_country(country_name).first['country']).to eq(country_name)
@@ -55,7 +57,7 @@ describe Dronestream::Strike do
   describe '#in_town' do
     let(:town_name) { 'Wadi Abida' }
     it 'returns an array of strikes for a given town' do
-      expect(strike.in_town(town_name).first['town']).to eq(town_name)
+      expect(strike.in_town(town_name).first['town'].include?(town_name)).to be_true 
     end
   end
 
@@ -97,6 +99,11 @@ describe Dronestream::Strike do
     it 'does not blow up' do
       expect(new_str['country']).to eq('Yemen')
       expect(new_str['civilians']).not_to eq(0)
+    end
+    let(:new_str2) { Dronestream::Strike.with_civilian_casualties.in_country('Yemen').first }
+    it 'does not blow up' do
+      expect(new_str2['country']).to eq('Yemen')
+      expect(new_str2['civilians']).not_to eq(0)
     end
   end
 end

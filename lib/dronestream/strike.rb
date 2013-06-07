@@ -10,7 +10,11 @@ module Dronestream
       end
 
       def strike
-        @strike || all
+        @strike ||= all
+      end
+
+      def reset # for tests
+        @strike = nil
       end
 
       def all
@@ -62,8 +66,9 @@ module Dronestream
         self
       end
 
-      def method_missing(name)
-        strike.send(name.to_sym) if strike.respond_to?(name)
+      def method_missing(name, *args, &block)
+        return strike.send(name.to_sym, *args, &block) if strike.respond_to?(name.to_sym)
+        super
       end
     end
 
